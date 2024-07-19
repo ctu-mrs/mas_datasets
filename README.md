@@ -7,7 +7,7 @@ There are 6 datasets in total, each with a specific type of motion: *Hover, Forw
 The rosbags contain unsynchronized LiDAR points, MAS, measurments, IMU measurements, and raw sensor data. 
 Ground truth is provided via RTK GPS (Emlid Reach) INT FIX solution.
 
-|                        |                             |
+| Loop                   | Rectangle                   |
 | ---                    | ---                         |
 | ![](.fig/map_loop.png) | ![](.fig/map_rectangle.png) |
 
@@ -28,9 +28,9 @@ The [mavros_msgs](https://github.com/mavlink/mavros) for interpreting the `mavro
 The [mrs_msgs](https://github.com/ctu-mrs/mrs_msgs) for interpreting the `mrs_msgs/RtkGps` messages containing the raw RTK data.
 
 ## Sensors
-|
---- | ---
-![](.fig/x500_back.png) | ![](.fig/x500_front.png)
+| X500 Back               | X500 Front               |
+| ---                     | ---                      |
+| ![](.fig/x500_back.png) | ![](.fig/x500_front.png) |
 
 - OS0-128 LiDAR (128 rows, 90 deg vFoV) (top-mounted):
   - LiDAR packets: `/os_lidar_packets` of type `ouster_ros/PacketMsg`
