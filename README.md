@@ -62,7 +62,6 @@ Sensor frames:
 - os_imu: `uav25/os_imu`
 - mrs_imu: `uav25/vio_imu`
 - distance sensor: `uav25/garmin`
-- 
 
 ```
 uav25/fcu
