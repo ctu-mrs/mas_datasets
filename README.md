@@ -1,7 +1,7 @@
 # MAS Datasets
 
 Public datasets for research on state estimation based on motor angular speeds (MAS).
-The datasets are open-sourced as part of our T-RO publication[1].
+The datasets are open-sourced as part of our T-RO publication [1].
 There are 6 datasets in total, each with a specific type of motion: *Hover, Forward, Lateral, Vertical, Rectangle, Loop*.
 
 The rosbags contain unsynchronized LiDAR points, MAS, measurments, IMU measurements, and raw sensor data. 
@@ -80,7 +80,3 @@ uav25/fcu
 ## Example tmuxinator session
 
 The `./tmux` folder contains an example _tmuxinator_ session that shows the recorded data in rviz.
-
-## Static transformations
-
-If you need to republish the transformations for the sensors under a different body frame, use the provided [launch file](./tmux/static_tfs.launch).
