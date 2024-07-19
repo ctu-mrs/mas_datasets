@@ -7,9 +7,9 @@ There are 6 datasets in total, each with a specific type of motion: *Hover, Forw
 The rosbags contain unsynchronized LiDAR points, MAS, measurments, IMU measurements, and raw sensor data. 
 Ground truth is provided via RTK GPS (Emlid Reach) INT FIX solution.
 
- | 
---- | ---
-![](.fig/map_loop.png) | ![](.fig/map_rectangle.png)
+|                        |                             |
+| ---                    | ---                         |
+| ![](.fig/map_loop.png) | ![](.fig/map_rectangle.png) |
 
 ## Publication
 
