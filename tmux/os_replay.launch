@@ -1,0 +1,103 @@
+<launch>
+
+  <arg name="UAV_NAME" default="$(env UAV_NAME)" />
+
+  <arg name="debug" default="false" />
+  <arg unless="$(arg debug)" name="launch_prefix" value=""/>
+  <arg     if="$(arg debug)" name="launch_prefix" value="debug_roslaunch"/>
+
+  <!-- <arg name="ouster_ns" default="ouster" doc="Override the default namespace of all ouster nodes"/> -->
+  <arg name="sensor_hostname" default="$(env OUSTER_IP)" doc="hostname or IP in dotted decimal form of the sensor"/>
+  <arg name="udp_dest" default="$(env OUSTER_UDP_DEST_IP)" doc="hostname or IP where the sensor will send data packets"/>
+  <arg name="lidar_port" default="0" doc="port to which the sensor should send lidar data"/>
+  <arg name="imu_port" default="0" doc="port to which the sensor should send imu data"/>
+  <arg name="udp_profile_lidar" default=" " doc="lidar packet profile; possible values: {
+    LEGACY,
+    RNG19_RFL8_SIG16_NIR16_DUAL,
+    RNG19_RFL8_SIG16_NIR16,
+    RNG15_RFL8_NIR8
+    }"/>
+  <arg name="lidar_mode" default="1024x10" doc="resolution and rate; possible values: {
+    512x10,
+    512x20,
+    1024x10,
+    1024x20,
+    2048x10,
+    4096x5
+    }"/>
+  <arg name="timestamp_mode" default="TIME_FROM_ROS_TIME" doc="method used to timestamp measurements; possible values: {
+    TIME_FROM_INTERNAL_OSC,
+    TIME_FROM_SYNC_PULSE_IN,
+    TIME_FROM_PTP_1588,
+    TIME_FROM_ROS_TIME
+    }"/>
+  <arg name="metadata" default=" " doc="path to write metadata file when receiving sensor data"/>
+  <arg name="tf_prefix" default="$(env UAV_NAME)" doc="namespace for tf transforms"/>
+  <arg name="image" default="false" doc="publish range/intensity/ambient image topic"/>
+  <arg name="replay" default="false" doc="do not connect to a sensor; expect /os_node/{lidar,imu}_packets from replay"/>
+
+  <arg name="nodelet" default="standalone" />
+  <arg name="nodelet_manager" default="" />
+
+  <node unless="$(arg replay)" pkg="nodelet" type="nodelet" name="os_nodelet"
+    output="screen" required="true"
+    launch-prefix="$(arg launch_prefix)"
+    args="$(arg nodelet) nodelets_os/OusterSensor $(arg nodelet_manager)">
+    <param name="~/sensor_hostname" type="str" value="$(arg sensor_hostname)"/>
+    <param name="~/udp_dest" type="str" value="$(arg udp_dest)"/>
+    <param name="~/lidar_port" type="int" value="$(arg lidar_port)"/>
+    <param name="~/imu_port" type="int" value="$(arg imu_port)"/>
+    <param name="~/udp_profile_lidar" type="str" value="$(arg udp_profile_lidar)"/>
+    <param name="~/lidar_mode" type="str" value="$(arg lidar_mode)"/>
+    <param name="~/timestamp_mode" type="str" value="$(arg timestamp_mode)"/>
+    <param name="~/metadata" type="str" value="$(arg metadata)"/>
+
+      <!-- Services -->
+    <remap from="set_config" to="~set_config" />
+    <remap from="get_config" to="~get_config" />
+    <remap from="get_metadata" to="/os_nodelet/get_metadata" />
+
+      <!-- Publishers -->
+    <remap from="lidar_packets" to="~lidar_packets" />
+    <remap from="imu_packets" to="~imu_packets" />
+    <remap from="sensor_info" to="~sensor_info" />
+    <remap from="uav_status" to="mrs_uav_status/display_string" />
+  </node>
+
+  <node if="$(arg replay)" pkg="nodelet" type="nodelet" name="os_replay"
+    output="screen" required="true"
+    launch-prefix="$(arg launch_prefix)"
+    args="$(arg nodelet) nodelets_os/OusterReplay $(arg nodelet_manager)">
+    <param name="~/metadata" value="$(arg metadata)"/>
+    <remap from="get_metadata" to="/os_cloud_nodelet/get_metadata" />
+  </node>
+
+<!-- <group ns="$(arg ouster_ns)"> -->
+  <!-- The driver may not start if os_cloud_nodelet launches before os_nodelet -->
+  <node pkg="nodelet" type="nodelet" name="os_cloud_nodelet"
+    output="screen" required="true"
+    launch-prefix="bash -c 'sleep 2; $0 $@' $(arg launch_prefix)"
+    args="$(arg nodelet) nodelets_os/OusterCloud $(arg nodelet_manager)">
+    <param name="~/tf_prefix" type="str" value="$(arg tf_prefix)"/>
+    <param name="~/timestamp_mode" type="str" value="$(arg timestamp_mode)"/>
+    <remap from="os_config" to="/os_config"/>
+    <remap from="lidar_packets" to="/os_lidar_packets"/>
+    <remap from="imu_packets" to="/os_imu_packets"/>
+    <remap from="imu" to="/os_imu"/>
+    <remap from="points" to="/os_points"/>
+    <remap from="is_alive" to="/is_alive"/>
+    <remap from="get_config" to="/os_cloud_nodelet/get_config" />
+    <remap from="get_metadata" to="/os_cloud_nodelet/get_metadata" />
+  </node>
+<!-- </group> -->
+
+<!-- <group ns="$(arg ouster_ns)"> -->
+  <node if="$(arg image)" pkg="nodelet" type="nodelet" name="os_img_nodelet"
+    output="screen" required="true"
+    launch-prefix="$(arg launch_prefix)"
+    args="$(arg nodelet) nodelets_os/OusterImage $(arg nodelet_manager)">
+    <remap from="os_config" to="/os_config"/>
+    <remap from="points" to="/points"/>
+  </node>
+
+</launch>
