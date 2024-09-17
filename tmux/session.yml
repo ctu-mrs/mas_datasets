@@ -12,12 +12,22 @@ windows:
       layout: tiled
       panes:
         # play the whole bag
-        - ./waitForRos.sh; rosbag play ../bag_files/rectangle.bag --clock -r 1.0
+        - ./waitForRos.sh; rosbag play ../bag_files/vertical.bag --clock -r 1.0
+  - rosbag_record:
+      layout: tiled
+      panes:
+        # play the whole bag
+        - rosbag record -ax "/os_points"
   - ouster_to_pc:
       layout: tiled
       panes:
         # convert the ouster LiDAR packets into PointClouds 
         - ./waitForRos.sh; roslaunch os_replay.launch replay:=true metadata:=`pwd`/10.10.20.90.json
+  - process:
+      layout: tiled
+      panes:
+        # downsample and remove close and far points
+        - ./waitForRos.sh; roslaunch slam_pipeline.launch 
   - rviz:
       layout: tiled
       panes:
