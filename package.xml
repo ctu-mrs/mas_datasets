@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+
+  <name>mas_datasets</name>
+  <version>1.0.0</version>
+  <description>Package containing the datasets for testing state estimation algorithms based on motor angular speeds</description>
+
+  <maintainer email="matej.petrlik@fel.cvut.cz">Matej Petrlik</maintainer>
+  <author>Matej Petrlik</author>
+
+  <license>BSD 3-Clause</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+</package>
