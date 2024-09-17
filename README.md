@@ -7,6 +7,17 @@ There are 6 datasets in total, each with a specific type of motion: *Hover, Forw
 The rosbags contain unsynchronized LiDAR points, MAS, measurments, IMU measurements, and raw sensor data. 
 Ground truth is provided via RTK GPS (Emlid Reach) INT FIX solution.
 
+There are two types of datasets:
+
+- **raw**
+  - raw LiDAR and IMU packets from Ouster OS0-128 LiDAR
+- **processed**
+  - IMU packets are converted to `sensor_msgs/Imu` topic
+  - LiDAR packets are converted to `sensor_msgs/PointCloud2` topic
+  - points with <0.5m range are removed 
+  - the point cloud is downsampled to 16 rows
+  - can be directly used in [MAS-LO](https://github.com/ctu-mrs/maslo)
+
 | Loop                   | Rectangle                   |
 | ---                    | ---                         |
 | ![](.fig/map_loop.png) | ![](.fig/map_rectangle.png) |
@@ -17,13 +28,13 @@ Ground truth is provided via RTK GPS (Emlid Reach) INT FIX solution.
 
 ## Download Datasets
 
-- To download the datasets, run script `download.sh`.
+- To download the datasets, run script `download_raw.sh` or `download_processed.sh`.
   - **Beware**, the datasets can be large!
   - All datasets will be downloaded into the `bag_files` directory.
 
 ## Requirements
 
-The [ouster_ros](https://github.com/ctu-mrs/ouster/) for interpreting the Ouster OS-128 LiDAR data.
+The [ouster_ros](https://github.com/ctu-mrs/ouster/) for interpreting the Ouster OS-128 LiDAR data in the **raw** datasets.
 The [mavros_msgs](https://github.com/mavlink/mavros) for interpreting the `mavros_msgs/ESCStatus` messages containing the MAS measurements.
 The [mrs_msgs](https://github.com/ctu-mrs/mrs_msgs) for interpreting the `mrs_msgs/RtkGps` messages containing the raw RTK data.
 
@@ -35,7 +46,7 @@ The [mrs_msgs](https://github.com/ctu-mrs/mrs_msgs) for interpreting the `mrs_ms
 - OS0-128 LiDAR (128 rows, 90 deg vFoV) (top-mounted):
   - LiDAR packets: `/os_lidar_packets` of type `ouster_ros/PacketMsg`
   - IMU: `/os_imu_packets` of type `ouster_ros/PacketMsg`
-  - use the [ouster_ros](https://github.com/ctu-mrs/ouster/) to decode the packets into point cloud and IMU data
+  - use the [ouster_ros](https://github.com/ctu-mrs/ouster/) to decode the packets into point cloud and IMU data (or use the **processed** dataset)
 - Garmin Lidar Lite (down-facing rangefinder):
   - data: `/distance_sensor` of type `sensor_msgs/Range`
 - Pixhawk4 FCU
@@ -71,6 +82,8 @@ uav25/fcu
 ├───> uav25/garmin
 ├───> uav25/vio_imu
 ```
+
+If you get warning messages about missing transforms, there is a static transform publisher in `launch/static_tfs.launch` that will publish the necessary static TFs.
 
 ## Dataset parameters
 

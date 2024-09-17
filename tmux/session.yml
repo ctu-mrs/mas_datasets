@@ -12,7 +12,7 @@ windows:
       layout: tiled
       panes:
         # play the whole bag
-        - ./waitForRos.sh; rosbag play ../bag_files/rectangle.bag --clock -r 1.0
+        - ./waitForRos.sh; rosbag play ../bag_files/raw/rectangle.bag --clock -r 1.0
   - ouster_to_pc:
       layout: tiled
       panes:

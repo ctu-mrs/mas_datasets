@@ -16,7 +16,7 @@ download_data() {
 
 ######################################################
 # Add datasets here:
-echo Downloading datasets
+echo Downloading raw datasets
 URL_BAG_LOOP=https://nasmrs.felk.cvut.cz/index.php/s/Q9O8afoaESZJaGx/download
 URL_BAG_RECTANGLE=https://nasmrs.felk.cvut.cz/index.php/s/7ufVl2aAzTpy0e5/download
 URL_BAG_FORWARD=https://nasmrs.felk.cvut.cz/index.php/s/7sf3ACvC9ikOqqI/download
@@ -26,10 +26,12 @@ URL_BAG_VERTICAL=https://nasmrs.felk.cvut.cz/index.php/s/qh66dYeiRAjbKAs/downloa
 
 # URLs for files and their respective subdirectories
 URL=( "$URL_BAG_LOOP" "$URL_BAG_RECTANGLE" "$URL_BAG_FORWARD" "$URL_BAG_HOVER" "$URL_BAG_LATERAL" "$URL_BAG_VERTICAL" )
-DATA_FOLDERS=( "bag_files/" "bag_files/" "bag_files/" "bag_files/" "bag_files/" "bag_files/" )
+DATA_FOLDERS=( "bag_files/raw" "bag_files/raw" "bag_files/raw" "bag_files/raw" "bag_files/raw" "bag_files/raw" )
 ######################################################
 
 mkdir -p bag_files
+mkdir -p bag_files/raw
+
 # Do not change below!
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
 for (( j=0; j<${#URL[@]}; j++ ));
