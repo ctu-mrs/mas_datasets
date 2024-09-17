@@ -38,6 +38,12 @@ There are two types of datasets:
 - The [mavros_msgs](https://github.com/mavlink/mavros) for interpreting the `mavros_msgs/ESCStatus` messages containing the MAS measurements.
 - The [mrs_msgs](https://github.com/ctu-mrs/mrs_msgs) for interpreting the `mrs_msgs/RtkGps` messages containing the raw RTK data.
 
+## Play the datasets
+
+The `./example` folder contains example _tmux_ sessions that shows the recorded data in rviz.
+Depending on whether you downloaded the **raw** or **processed** dataset, run `./example/raw/start.sh` or `./example/processed/start.sh`.
+To change the played dataset change the `DATASET` variable in the beginning of the script to other dataset name.
+
 ## Sensors
 | X500 Back               | X500 Front               |
 | ---                     | ---                      |
@@ -89,6 +95,3 @@ If you get warning messages about missing transforms, there is a static transfor
 
 ![](.fig/dataset_params.png)
 
-## Example tmuxinator session
-
-The `./tmux` folder contains an example _tmuxinator_ session that shows the recorded data in rviz.

@@ -5,6 +5,7 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /TF1/Frames1
+        - /ouster_point_cloud1/Autocompute Value Bounds1
       Splitter Ratio: 0.5068285465240479
     Tree Height: 1177
   - Class: rviz/Selection
@@ -79,9 +80,9 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 17.765281677246094
-        Min Value: 2.538784980773926
-        Value: true
+        Max Value: 20
+        Min Value: 0
+        Value: false
       Axis: Z
       Channel Name: intensity
       Class: rviz/PointCloud2
@@ -99,7 +100,7 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.20000000298023224
       Style: Flat Squares
-      Topic: /os_points
+      Topic: /os_points_processed
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
@@ -202,7 +203,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/ThirdPersonFollower
-      Distance: 61.58636474609375
+      Distance: 81.647216796875
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -218,9 +219,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.4903993010520935
+      Pitch: 0.22039923071861267
       Target Frame: uav25/fcu_untilted
-      Yaw: 2.4404003620147705
+      Yaw: 2.190396785736084
     Saved: ~
 Window Geometry:
   Displays:

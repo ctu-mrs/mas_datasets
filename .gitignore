@@ -1,2 +1,4 @@
 *.bag
 *.sw*
+example/raw/logs
+example/processed/logs
