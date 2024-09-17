@@ -34,9 +34,9 @@ There are two types of datasets:
 
 ## Requirements
 
-The [ouster_ros](https://github.com/ctu-mrs/ouster/) for interpreting the Ouster OS-128 LiDAR data in the **raw** datasets.
-The [mavros_msgs](https://github.com/mavlink/mavros) for interpreting the `mavros_msgs/ESCStatus` messages containing the MAS measurements.
-The [mrs_msgs](https://github.com/ctu-mrs/mrs_msgs) for interpreting the `mrs_msgs/RtkGps` messages containing the raw RTK data.
+- The [ouster_ros](https://github.com/ctu-mrs/ouster/) for interpreting the Ouster OS-128 LiDAR data in the **raw** datasets.
+- The [mavros_msgs](https://github.com/mavlink/mavros) for interpreting the `mavros_msgs/ESCStatus` messages containing the MAS measurements.
+- The [mrs_msgs](https://github.com/ctu-mrs/mrs_msgs) for interpreting the `mrs_msgs/RtkGps` messages containing the raw RTK data.
 
 ## Sensors
 | X500 Back               | X500 Front               |
