@@ -27,6 +27,15 @@ There are two types of datasets:
 ## Publication
 
 - [1] Petrlik, M.; Penicka, R.; Saska, M. *Motor Angular Speed Preintegration for Multirotor UAV State Estimation*, IEEE Transactions on Robotics (in review), 2024
+```bibtex
+@article{petrlik2024maslo,
+  author={M. Petrlik and Penicka, Robert and Saska, Martin}, 
+  journal={IEEE Transactions on Robotics}, 
+  title={{Motor Angular Speed Preintegration for Multirotor UAV State Estimation}}, 
+  year={2024},
+  annotation = {in review}
+}
+```
 
 ## Download Datasets
 
