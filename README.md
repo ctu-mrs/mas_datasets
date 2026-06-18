@@ -1,7 +1,7 @@
 # MAS Datasets
 
 Public datasets for research on state estimation based on motor angular speeds (MAS).
-The datasets are open-sourced as part of our T-RO publication [1].
+The datasets are open-sourced as part of our RAS publication [1].
 There are 6 datasets in total, each with a specific type of motion: *Hover, Forward, Lateral, Vertical, Rectangle, Loop*.
 
 The rosbags contain unsynchronized LiDAR points, MAS, measurments, IMU measurements, and raw sensor data. 
@@ -26,13 +26,13 @@ There are two types of datasets:
 
 ## Publication
 
-- [1] Petrlik, M.; Penicka, R.; Saska, M. *Motor Angular Speed Preintegration for Multirotor UAV State Estimation*, IEEE Transactions on Robotics (in review), 2024
+- [1] Petrlik, M.; Novak, F.; Penicka, R.; Saska, M. *Motor Angular Speed Preintegration for Multirotor UAV State Estimation*, RAS (in review), 2026
 ```bibtex
-@article{petrlik2024maslo,
-  author={M. Petrlik and Penicka, Robert and Saska, Martin}, 
-  journal={IEEE Transactions on Robotics}, 
+@article{petrlik2026maslo,
+  author={Petrlik, Matej and Novak, Filip and Penicka, Robert and Saska, Martin}, 
+  journal={Robotics and Autonomous Systems}, 
   title={{Motor Angular Speed Preintegration for Multirotor UAV State Estimation}}, 
-  year={2024},
+  year={2026},
   annotation = {in review}
 }
 ```
